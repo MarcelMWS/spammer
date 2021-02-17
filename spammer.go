@@ -12,8 +12,10 @@ import (
 
 /*
 	usage
-	- applikigospammer fatTx <number>
-	- aplikigospammer bulkTxs
+	- spammer fatTx <number>
+	- gaiad tx sign fatTx.json --chain-id stargate-final --keyring-backend test --keyring-dir . --from main --node tcp://3.64.250.73:26657 > signed.json
+	- gaiad keys list --keyring-backend test --keyring-dir . --output json > addrs.json
+	- spammer bulkTxs
 */
 
 func main() {
@@ -133,8 +135,8 @@ func buildFundTx(addresses []string) {
 			FromAddress: "cosmos1wjdgeersnvwf9e7w7j54v7lu9yflvwe68smq0h",
 			ToAddress:   addr,
 			Amount: []Amount{Amount{
-				Denom:  "",
-				Amount: "",
+				Denom:  "umuon",
+				Amount: "1",
 			}},
 		}
 
@@ -151,10 +153,10 @@ func buildFundTx(addresses []string) {
 		AuthInfo: AuthInfo{
 			SignerInfos: []interface{}{},
 			Fee: Fee{
-				Amount: []Amount{Amount{
-					Denom:  "",
-					Amount: "",
-				}},
+				Amount: []Amount{}, /* []Amount{Amount{
+					/* Denom:  ,
+					Amount:
+				}} */
 				GasLimit: "200000000",
 				Payer:    "",
 				Granter:  "",
@@ -255,7 +257,7 @@ func generateAccountCMD(accountNumber int) accountInfo {
 
 func signTxCmd(address string) {
 	fmt.Println("signing tx of account", address)
-	accCmd := exec.Command("regen", "tx", "sign", fmt.Sprintf("txs/unsigned/%s.json", address),
+	accCmd := exec.Command("gaiad", "tx", "sign", fmt.Sprintf("txs/unsigned/%s.json", address),
 		"--from", address,
 		"--chain-id", "stargate-final",
 		"--keyring-backend", "test",
@@ -278,7 +280,7 @@ func signTxCmd(address string) {
 
 	fmt.Println("broadcasting", address)
 	bcCmd := exec.Command("gaiad", "tx", "broadcast", fmt.Sprintf("txs/signed/%s", address),
-		"--node", "tcp://3.64.250.73:26657")
+		"--node", "tcp://3.64.250.73:26657", "-b", "async")
 
 	bz2, err := bcCmd.CombinedOutput()
 	if err != nil {
