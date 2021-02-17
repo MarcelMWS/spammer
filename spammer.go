@@ -83,6 +83,10 @@ func createBulkTxs() {
 		buildSendTx(addr.Address)
 	}
 
+	for _, addr := range addrs {
+		broadCastSendTx(addr.Address)
+	}
+
 }
 
 // Fund tx builder
@@ -278,6 +282,9 @@ func signTxCmd(address string) {
 		os.Exit(1)
 	}
 
+}
+
+func broadCastSendTx(address string) {
 	fmt.Println("broadcasting", address)
 	bcCmd := exec.Command("gaiad", "tx", "broadcast", fmt.Sprintf("txs/signed/%s", address),
 		"--node", "tcp://3.64.250.73:26657", "-b", "async")
