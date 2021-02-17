@@ -237,7 +237,7 @@ type accountInfo struct {
 
 func generateAccountCMD(accountNumber int) accountInfo {
 	fmt.Println("Generating Account", accountNumber)
-	accCmd := exec.Command("regen", "keys", "add", strconv.Itoa(accountNumber), "--keyring-backend", "test", "--output", "json", "--keyring-dir", ".")
+	accCmd := exec.Command("gaiad", "keys", "add", strconv.Itoa(accountNumber), "--keyring-backend", "test", "--output", "json", "--keyring-dir", ".")
 	bz, err := accCmd.CombinedOutput()
 	if err != nil {
 		fmt.Println(string(bz))
@@ -257,10 +257,10 @@ func signTxCmd(address string) {
 	fmt.Println("signing tx of account", address)
 	accCmd := exec.Command("regen", "tx", "sign", fmt.Sprintf("txs/unsigned/%s.json", address),
 		"--from", address,
-		"--chain-id", "aplikigo-1",
+		"--chain-id", "stargate-final",
 		"--keyring-backend", "test",
 		"--keyring-dir", ".",
-		"--node", "tcp://public-rpc1.regen.vitwit.com:26657")
+		"--node", "tcp://3.64.250.73:26657")
 
 	bz, err := accCmd.CombinedOutput()
 	if err != nil {
@@ -277,8 +277,8 @@ func signTxCmd(address string) {
 	}
 
 	fmt.Println("broadcasting", address)
-	bcCmd := exec.Command("regen", "tx", "broadcast", fmt.Sprintf("txs/signed/%s", address),
-		"--node", "tcp://public-rpc1.regen.vitwit.com:26657")
+	bcCmd := exec.Command("gaiad", "tx", "broadcast", fmt.Sprintf("txs/signed/%s", address),
+		"--node", "tcp://3.64.250.73:26657")
 
 	bz2, err := bcCmd.CombinedOutput()
 	if err != nil {
