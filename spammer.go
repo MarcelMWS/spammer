@@ -130,11 +130,11 @@ func buildFundTx(addresses []string) {
 	for i, addr := range addresses {
 		msgs[i] = BasicSendMsg{
 			Type:        "/cosmos.bank.v1beta1.MsgSend",
-			FromAddress: "regen:10l9t2lvxhxut2s60lwct8f6n2q5x88khmk5pts",
+			FromAddress: "cosmos1wjdgeersnvwf9e7w7j54v7lu9yflvwe68smq0h",
 			ToAddress:   addr,
 			Amount: []Amount{Amount{
-				Denom:  "utree",
-				Amount: "1",
+				Denom:  "",
+				Amount: "",
 			}},
 		}
 
@@ -152,8 +152,8 @@ func buildFundTx(addresses []string) {
 			SignerInfos: []interface{}{},
 			Fee: Fee{
 				Amount: []Amount{Amount{
-					Denom:  "utree",
-					Amount: "5000",
+					Denom:  "",
+					Amount: "",
 				}},
 				GasLimit: "200000000",
 				Payer:    "",
@@ -184,9 +184,9 @@ func buildSendTx(from string) {
 				BasicSendMsg{
 					Type:        "/cosmos.bank.v1beta1.MsgSend",
 					FromAddress: from,
-					ToAddress:   "regen:10l9t2lvxhxut2s60lwct8f6n2q5x88khmk5pts",
+					ToAddress:   "cosmos1wjdgeersnvwf9e7w7j54v7lu9yflvwe68smq0h",
 					Amount: []Amount{Amount{
-						Denom:  "utree",
+						Denom:  "umuon",
 						Amount: "1",
 					}},
 				}},
