@@ -139,7 +139,7 @@ func buildFundTx(addresses []string) {
 			FromAddress: "cosmos1h4u0nh2h7z4lj0v9ekge42wfpaug8dvksznrz4",
 			ToAddress:   addr,
 			Amount: []Amount{Amount{
-				Denom:  "umuon",
+				Denom:  "stake",
 				Amount: "1",
 			}},
 		}
@@ -192,7 +192,7 @@ func buildSendTx(from string) {
 					FromAddress: from,
 					ToAddress:   "cosmos1h4u0nh2h7z4lj0v9ekge42wfpaug8dvksznrz4",
 					Amount: []Amount{Amount{
-						Denom:  "umuon",
+						Denom:  "stake",
 						Amount: "1",
 					}},
 				}},
