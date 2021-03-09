@@ -287,7 +287,7 @@ func signTxCmd(num int, address string) {
 func broadCastSendTx(num int, address string) {
 	fmt.Printf("%d: broadcasting %s \n", num, address)
 	bcCmd := exec.Command("gaiad", "tx", "broadcast", fmt.Sprintf("txs/signed/%s", address),
-		"--node", "tcp://52.59.242.1:26657", "-b", "async")
+		"--node", "tcp://52.59.242.1:26657", "-b", "sync")
 
 	bz2, err := bcCmd.CombinedOutput()
 	if err != nil {
