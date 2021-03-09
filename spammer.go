@@ -136,7 +136,7 @@ func buildFundTx(addresses []string) {
 	for i, addr := range addresses {
 		msgs[i] = BasicSendMsg{
 			Type:        "/cosmos.bank.v1beta1.MsgSend",
-			FromAddress: "cosmos1wjdgeersnvwf9e7w7j54v7lu9yflvwe68smq0h",
+			FromAddress: "cosmos1h4u0nh2h7z4lj0v9ekge42wfpaug8dvksznrz4",
 			ToAddress:   addr,
 			Amount: []Amount{Amount{
 				Denom:  "umuon",
@@ -190,7 +190,7 @@ func buildSendTx(from string) {
 				BasicSendMsg{
 					Type:        "/cosmos.bank.v1beta1.MsgSend",
 					FromAddress: from,
-					ToAddress:   "cosmos1wjdgeersnvwf9e7w7j54v7lu9yflvwe68smq0h",
+					ToAddress:   "cosmos1h4u0nh2h7z4lj0v9ekge42wfpaug8dvksznrz4",
 					Amount: []Amount{Amount{
 						Denom:  "umuon",
 						Amount: "1",
