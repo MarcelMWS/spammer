@@ -260,7 +260,7 @@ func signTxCmd(address string) {
 		"--chain-id", "aplikigo-1",
 		"--keyring-backend", "test",
 		"--keyring-dir", ".",
-		"--node", "tcp://public-rpc1.regen.vitwit.com:26657")
+		"--node", "tcp://135.181.32.203:26657")
 
 	bz, err := accCmd.CombinedOutput()
 	if err != nil {
@@ -278,7 +278,7 @@ func signTxCmd(address string) {
 
 	fmt.Println("broadcasting", address)
 	bcCmd := exec.Command("regen", "tx", "broadcast", fmt.Sprintf("txs/signed/%s", address),
-		"--node", "tcp://public-rpc1.regen.vitwit.com:26657")
+		"--node", "tcp://135.181.32.203:26657")
 
 	bz2, err := bcCmd.CombinedOutput()
 	if err != nil {
