@@ -13,7 +13,7 @@ import (
 /*
 	usage
 	- spammer fatTx <number>
-	- gaiad tx sign fatTx.json --chain-id stargate-final --keyring-backend test --keyring-dir . --from main --node tcp://35.157.124.89:26657 > signed.json
+	- gaiad tx sign fatTx.json --chain-id sc --keyring-backend test --keyring-dir . --from main --node tcp://35.157.124.89:26657 > signed.json
 	- gaiad keys list --keyring-backend test --keyring-dir . --output json > addrs.json
 	- spammer bulkTxs
 */
@@ -263,10 +263,10 @@ func signTxCmd(address string) {
 	fmt.Println("signing tx of account", address)
 	accCmd := exec.Command("gaiad", "tx", "sign", fmt.Sprintf("txs/unsigned/%s.json", address),
 		"--from", address,
-		"--chain-id", "stargate-final",
+		"--chain-id", "sc",
 		"--keyring-backend", "test",
 		"--keyring-dir", ".",
-		"--node", "tcp://35.157.124.89:26657")
+		"--node", "tcp://52.59.242.1:26657")
 
 	bz, err := accCmd.CombinedOutput()
 	if err != nil {
@@ -287,7 +287,7 @@ func signTxCmd(address string) {
 func broadCastSendTx(address string) {
 	fmt.Println("broadcasting", address)
 	bcCmd := exec.Command("gaiad", "tx", "broadcast", fmt.Sprintf("txs/signed/%s", address),
-		"--node", "tcp://35.157.124.89:26657", "-b", "async")
+		"--node", "tcp://52.59.242.1:26657", "-b", "async")
 
 	bz2, err := bcCmd.CombinedOutput()
 	if err != nil {
