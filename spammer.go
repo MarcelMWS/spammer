@@ -79,12 +79,12 @@ func createBulkTxs() {
 
 	fmt.Println("generating signed transactions for all accounts")
 
-	for _, addr := range addrs {
-		buildSendTx(addr.Address)
+	for i, addr := range addrs {
+		buildSendTx(i, addr.Address)
 	}
 
-	for _, addr := range addrs {
-		broadCastSendTx(addr.Address)
+	for j, addr := range addrs {
+		broadCastSendTx(j, addr.Address)
 	}
 
 }
@@ -183,7 +183,7 @@ func buildFundTx(addresses []string) {
 
 }
 
-func buildSendTx(from string) {
+func buildSendTx(num int, from string) {
 	tx := BasicTx{
 		Body: Body{
 			Messages: []BasicSendMsg{
@@ -228,7 +228,7 @@ func buildSendTx(from string) {
 	}
 
 	//sign
-	signTxCmd(from)
+	signTxCmd(num, from)
 }
 
 // Account generation
@@ -259,8 +259,8 @@ func generateAccountCMD(accountNumber int) accountInfo {
 	return ai
 }
 
-func signTxCmd(address string) {
-	fmt.Println("signing tx of account", address)
+func signTxCmd(num int, address string) {
+	fmt.Printf("%d: signing tx of account %s \n", num, address)
 	accCmd := exec.Command("gaiad", "tx", "sign", fmt.Sprintf("txs/unsigned/%s.json", address),
 		"--from", address,
 		"--chain-id", "sc",
@@ -284,8 +284,8 @@ func signTxCmd(address string) {
 
 }
 
-func broadCastSendTx(address string) {
-	fmt.Println("broadcasting", address)
+func broadCastSendTx(num int, address string) {
+	fmt.Printf("%d: broadcasting %s \n", num, address)
 	bcCmd := exec.Command("gaiad", "tx", "broadcast", fmt.Sprintf("txs/signed/%s", address),
 		"--node", "tcp://52.59.242.1:26657", "-b", "async")
 
